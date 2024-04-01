@@ -125,8 +125,9 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
             if(enemies1[i].hitbox.contains(mouseX,mouseY)){
                 if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies1[i].width*0.75) {
                     enemies1[i].isAlive=false;
-//                    picPicker = (int)(Math.random()*3)+1;
-//                    System.out.println(picPicker);
+                    enemies1[i].dx = 0;
+                    enemies1[i].dy = 0;
+                    enemies1[i].gravity = 0;
                 } else {
                     System.out.println("Attack too short");
                 }
