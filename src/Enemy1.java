@@ -8,7 +8,7 @@ public class Enemy1 {
     public int dy;
     public int width;
     public int height;
-    public int hitCounter = 0;
+//    public int hitCounter = 0;
     public Rectangle hitbox;
     public boolean isAlive;
     public boolean draggedThrough;
@@ -39,18 +39,27 @@ public class Enemy1 {
         picPicker = (int)(Math.random()*3)+1;
         gravity=2;
 
-    }
+        }
+        public void gravityMove(int a){
+        int startingV = a;
+        int counter = 0;
+        counter++;
+        dy =  startingV-(counter*(-5));
+        }
 
 
 
     public void move(boolean lives) {
 
-//        xpos = xpos - dx;
-//        ypos = ypos - dy;
+        xpos = xpos - dx;
+//        ypos = ypos + dy;
+//        ypos = gravityMove(10);
         counter+=1;
         if(lives == false){
             isAlive=false;
 //            hitCounter++;
+//            System.out.println(hitCounter);
+//            System.out.println("hitcounter"+ hitCounter);
 //            isAlive = true;
             currentTime=System.currentTimeMillis();
             respawnTime=Math.random()*5+3;
