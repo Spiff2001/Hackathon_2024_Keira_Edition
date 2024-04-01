@@ -17,7 +17,7 @@ import java.awt.event.*;
 
 //*******************************************************************************
 
-public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotionListener,KeyListener {
+public class BasicGameApp implements Runnable, MouseListener, MouseMotionListener, KeyListener {
 
     //Variable Definition Section
     //Declare the variables used in the program
@@ -38,6 +38,7 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
     public Enemy enemy2;
     public int mouseX, mouseY;
     public boolean dragging = false;
+
 
     // Main method definition
     // This is the code that runs first and automatically
@@ -77,9 +78,9 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
 
     public void checkIntersections() {
 
-        if(!enemy1.hitBox.intersects(enemy2.hitBox)){
-            enemy1.isAlive=false;
-        }
+//        if(!enemy1.hitBox.intersects(enemy2.hitBox)){
+//            enemy1.isAlive=false;
+//        }
 
     }
 
@@ -91,6 +92,7 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
+
 
         //draw the images
 
@@ -119,6 +121,8 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
         canvas = new Canvas();
         canvas.setBounds(0, 0, WIDTH, HEIGHT);
         canvas.setIgnoreRepaint(true);
+        canvas.addMouseListener(this);
+        canvas.addMouseMotionListener(this);
 
         panel.add(canvas);  // adds the canvas to the panel.
 
@@ -183,13 +187,10 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
 
         mouseX = x;
         mouseY = y;
-        System.out.println("Mouse Clicked at " + x + ", " + y);
+        System.out.println("Mouse dragged at " + x + ", " + y);
 
-        for (int i = 0; i < enemies.length; i++) {
-            if (enemies[i].hitbox.contains(x, y)) {
 
-            }
-        }
+        System.out.println("Mouse dragged at");
     }
 
     @Override
