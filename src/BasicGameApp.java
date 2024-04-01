@@ -50,6 +50,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public BufferStrategy bufferStrategy;
 
     public Enemy1 enemies1[];
+    public Enemy2 enemies2[];
 
     public int killCount = 0;
 
@@ -93,11 +94,14 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
         killSplotch2 = Toolkit.getDefaultToolkit().getImage("splatter 2.png");
         killSplotch3 = Toolkit.getDefaultToolkit().getImage("splatter 3.png");
 
-        enemies1 = new Enemy1[10];
+        enemies1 = new Enemy1[6];
+        enemies2 = new Enemy2[3];
         for(int i = 0; i < enemies1.length; i++){
-//            int picPicker = Math.random()
+
             enemies1[i] = new Enemy1(i*10+20,400, enemy1IMG);
-            System.out.println("enemy made");
+        }
+        for(int i = 0; i < enemies2.length; i++){
+            enemies2[i] = new Enemy2(0,200, enemy2IMG);
         }
 
         //variable and objects
@@ -138,11 +142,29 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
                 }
             }
         }
+
+        for (int i = 0; i < enemies2.length; i++) {
+            if(enemies2[i].hitbox.contains(mouseX,mouseY)){
+                if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies2[i].width*0.75) {
+                    enemies2[i].isAlive=false;
+                    enemies2[i].dx = 0;
+                    enemies2[i].dy = 0;
+                    enemies2[i].gravity = 0;
+                } else {
+                    System.out.println("Attack too short");
+                }
+            }
+        }
+        
     }
 
     public void moveThings() {
         for (int i = 0; i < enemies1.length; i++) {
             enemies1[i].move();
+        }
+
+        for (int i = 0; i < enemies2.length; i++) {
+            enemies2[i].move();
         }
     }
 
@@ -166,6 +188,20 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
                     } else if (picPicker == 3) {
                         g.drawImage(killSplotch3, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height,null);
                     }
+            }
+        }
+        for (int i = 0; i < enemies2.length; i++) {
+            if (enemies2[i].isAlive == true) {
+                g.drawImage(enemies2[i].pic, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
+            } else if (enemies2[i].isAlive == false){
+                int picPicker = enemies2[i].picPicker;
+                if (picPicker == 1) {
+                    g.drawImage(killSplotch, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
+                } else if (picPicker == 2) {
+                    g.drawImage(killSplotch2, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height,null);
+                } else if (picPicker == 3) {
+                    g.drawImage(killSplotch3, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height,null);
+                }
             }
         }
 //    }
