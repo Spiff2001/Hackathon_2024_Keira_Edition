@@ -33,6 +33,9 @@ public class BasicGameApp implements Runnable {
 
     public BufferStrategy bufferStrategy;
 
+    public Enemy enemy1;
+    public Enemy enemy2;
+
     // Main method definition
     // This is the code that runs first and automatically
     public static void main(String[] args) {
@@ -67,6 +70,14 @@ public class BasicGameApp implements Runnable {
             render();  // paint the graphics
             pause(10); // sleep for 10 ms
         }
+    }
+
+    public void checkIntersections() {
+
+        if(!enemy1.hitBox.intersects(enemy2.hitBox)){
+            enemy1.isAlive=false;
+        }
+
     }
 
     public void moveThings() {
