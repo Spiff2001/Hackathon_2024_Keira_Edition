@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.*;
 
+
 //*******************************************************************************
 
 public class BasicGameApp implements Runnable, MouseListener, MouseMotionListener, KeyListener {
@@ -24,8 +25,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     //You can set their initial values too
 
     //Sets the width and height of the program window
-    final int WIDTH = 1000;
-    final int HEIGHT = 7000;
+    final int WIDTH = 900;
+    final int HEIGHT = 675;
 
     //Declare the variables needed for the graphics
     public JFrame frame;
@@ -44,6 +45,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public Image enemy4IMG;
     public Image killSplotch;
     public Image killSplotch2;
+    public Image killSplotch3;
 
 
 
@@ -80,19 +82,21 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
 
         setUpGraphics();
-        background = Toolkit.getDefaultToolkit().getImage("background game");
-        background2 = Toolkit.getDefaultToolkit().getImage("background game2");
-        background3 = Toolkit.getDefaultToolkit().getImage("background game3");
-        background4 = Toolkit.getDefaultToolkit().getImage("background game4");
-        background5 = Toolkit.getDefaultToolkit().getImage("background game5");
-        background6 = Toolkit.getDefaultToolkit().getImage("background game6");
-        background7 = Toolkit.getDefaultToolkit().getImage("background game7");
-        enemy1IMG = Toolkit.getDefaultToolkit().getImage("enemies 1");
-        enemy2IMG = Toolkit.getDefaultToolkit().getImage("enemies 2");
-        enemy3IMG = Toolkit.getDefaultToolkit().getImage("background game");
-        enemy4IMG = Toolkit.getDefaultToolkit().getImage("background game");
-        killSplotch = Toolkit.getDefaultToolkit().getImage("background game");
-        killSplotch2 = Toolkit.getDefaultToolkit().getImage("background game");
+        background = Toolkit.getDefaultToolkit().getImage("background game.jpg");
+        background2 = Toolkit.getDefaultToolkit().getImage("background game 2.jpg");
+        background3 = Toolkit.getDefaultToolkit().getImage("background game 3.jpg");
+        background4 = Toolkit.getDefaultToolkit().getImage("background game 4.jpg");
+        background5 = Toolkit.getDefaultToolkit().getImage("background game 5.jpg");
+        background6 = Toolkit.getDefaultToolkit().getImage("background game 6.jpg");
+        background7 = Toolkit.getDefaultToolkit().getImage("background game 7.jpg");
+        enemy1IMG = Toolkit.getDefaultToolkit().getImage("enemies 1.png");
+        enemy2IMG = Toolkit.getDefaultToolkit().getImage("enemies 2.png");
+        enemy3IMG = Toolkit.getDefaultToolkit().getImage("enemies axolotl.png");
+        enemy4IMG = Toolkit.getDefaultToolkit().getImage("enemies snitch.png");
+        killSplotch = Toolkit.getDefaultToolkit().getImage("splatter 1.png");
+        killSplotch2 = Toolkit.getDefaultToolkit().getImage("splatter 2.png");
+        killSplotch3 = Toolkit.getDefaultToolkit().getImage("splatter 3.png");
+
 
 
         enemies = new Enemy[10];
@@ -141,12 +145,12 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     //Paints things on the screen using bufferStrategy
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+        g.drawImage(background,0,0, WIDTH ,HEIGHT,null);
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
-
         //draw the images
-        g.drawImage(background, 0 ,0);
-        g.drawImage(background,0,0,null);
+        g.drawImage(background,0,0, WIDTH ,HEIGHT,null);
+
 
         g.dispose();
         bufferStrategy.show();
@@ -190,7 +194,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
         canvas.requestFocus();
         System.out.println("DONE graphic setup");
     }
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
 
