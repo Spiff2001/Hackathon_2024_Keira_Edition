@@ -94,7 +94,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
         enemies1 = new Enemy1[10];
         for(int i = 0; i < enemies1.length; i++){
 //            int picPicker = Math.random()
-            enemies1[i] = new Enemy1(i*80+20,100, enemy1IMG);
+            enemies1[i] = new Enemy1(i*10+20,400, enemy1IMG);
             System.out.println("enemy made");
         }
 
@@ -136,7 +136,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
     public void moveThings() {
         for (int i = 0; i < enemies1.length; i++) {
-            enemies1[i].move(true);
+            enemies1[i].move();
         }
     }
 
