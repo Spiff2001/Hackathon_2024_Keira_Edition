@@ -54,9 +54,9 @@ public class Enemy2 {
             lifeCounter+=1;
             if(lifeCounter%(int)(Math.random()*500)==0){
                 isAlive=true;
-                xpos=900;
-                ypos=(int)(Math.random()*300);
-                dx = (int)(Math.random()*8-2);
+                xpos=(int)(Math.random()*900);
+                ypos=900;
+                dx = (int)(Math.random()*10-5);
                 dy = (int)(Math.random()*8+2);
             }
         }
@@ -68,14 +68,15 @@ public class Enemy2 {
             }
 
             if(ypos>675&isAlive==true){
-                ypos=(int)(Math.random()*300);
-                dy = (int)(Math.random()*2+4);;
+                ypos=675;
+                dy = (int)(Math.random()*8+4);;
             }
-            if((xpos>1000)&isAlive==true){
-                xpos=0;
-                dx = (int)(Math.random()*6+2);
+            if((xpos>1000 || xpos<0)&isAlive==true){
+                xpos=(int)(Math.random()*900);
+                dx = (int)(Math.random()*10-5);
 
             }
+
 
 
 

@@ -46,11 +46,14 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public Image killSplotch;
     public Image killSplotch2;
     public Image killSplotch3;
+    public Image gameOverImage;
+    public boolean gameOver;
 
     public BufferStrategy bufferStrategy;
 
     public Enemy1 enemies1[];
     public Enemy2 enemies2[];
+    public Enemy3 enemies3[];
 
     public int killCount = 0;
 
@@ -79,6 +82,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
 
         setUpGraphics();
+        gameOver=false;
+        gameOverImage=Toolkit.getDefaultToolkit().getImage("game over.jpg");
         background = Toolkit.getDefaultToolkit().getImage("background game.jpg");
         background2 = Toolkit.getDefaultToolkit().getImage("background game 2.jpg");
         background3 = Toolkit.getDefaultToolkit().getImage("background game 3.jpg");
@@ -96,12 +101,14 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
         enemies1 = new Enemy1[6];
         enemies2 = new Enemy2[3];
+        enemies3 = new Enemy3[3];
         for(int i = 0; i < enemies1.length; i++){
 
             enemies1[i] = new Enemy1(i*10+20,400, enemy1IMG);
         }
         for(int i = 0; i < enemies2.length; i++){
             enemies2[i] = new Enemy2(0,200, enemy2IMG);
+            enemies3[i] = new Enemy3(0,200, enemy3IMG);
         }
 
         //variable and objects
@@ -120,6 +127,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public void run() {
         //for the moment we will loop things forever.
         while (true) {
+
             moveThings();  //move all the game objects
             render();  // paint the graphics
             pause(10); // sleep for 10 ms
@@ -145,13 +153,31 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
         for (int i = 0; i < enemies2.length; i++) {
             if(enemies2[i].hitbox.contains(mouseX,mouseY)){
-                if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies2[i].width*0.75) {
-                    enemies2[i].isAlive=false;
-                    enemies2[i].dx = 0;
-                    enemies2[i].dy = 0;
-                    enemies2[i].gravity = 0;
-                } else {
-                    System.out.println("Attack too short");
+                if(enemies2[i].hitbox.contains(mouseX,mouseY)){
+                    if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies2[i].width*0.75) {
+                        if (enemies2[i].isAlive == true) {
+                            killCount++;
+                        }
+                        enemies2[i].isAlive=false;
+                        enemies2[i].dx = 0;
+                        enemies2[i].dy = 0;
+                        enemies2[i].gravity = 0;
+                    } else {
+                        System.out.println("Attack too short");
+                    }
+                }
+            }
+            if(enemies3[i].hitbox.contains(mouseX,mouseY)){
+                if(enemies3[i].hitbox.contains(mouseX,mouseY)){
+                    if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies3[i].width*0.75) {
+                        if (enemies3[i].isAlive == true) {
+
+                        }
+                        gameOver=true;
+
+                    } else {
+                        System.out.println("Attack too short");
+                    }
                 }
             }
         }
@@ -165,6 +191,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
         for (int i = 0; i < enemies2.length; i++) {
             enemies2[i].move();
+            enemies3[i].move();
         }
     }
 
@@ -174,39 +201,54 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
         g.clearRect(0, 0, WIDTH, HEIGHT);
         g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
         g.drawString("Score " + killCount*100, 40, 40);
-
-        //draw the images
-        for (int i = 0; i < enemies1.length; i++) {
-            if (enemies1[i].isAlive == true) {
-                g.drawImage(enemies1[i].pic, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height, null);
-            } else if (enemies1[i].isAlive == false){
-                int picPicker = enemies1[i].picPicker;
+        if(gameOver){
+            g.drawImage(gameOverImage, 0, 0, WIDTH, HEIGHT, null);
+        }
+        else {
+            //draw the images
+            for (int i = 0; i < enemies1.length; i++) {
+                if (enemies1[i].isAlive == true) {
+                    g.drawImage(enemies1[i].pic, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height, null);
+                } else if (enemies1[i].isAlive == false) {
+                    int picPicker = enemies1[i].picPicker;
                     if (picPicker == 1) {
                         g.drawImage(killSplotch, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height, null);
                     } else if (picPicker == 2) {
-                        g.drawImage(killSplotch2, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height,null);
+                        g.drawImage(killSplotch2, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height, null);
                     } else if (picPicker == 3) {
-                        g.drawImage(killSplotch3, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height,null);
+                        g.drawImage(killSplotch3, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height, null);
                     }
-            }
-        }
-        for (int i = 0; i < enemies2.length; i++) {
-            if (enemies2[i].isAlive == true) {
-                g.drawImage(enemies2[i].pic, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
-            } else if (enemies2[i].isAlive == false){
-                int picPicker = enemies2[i].picPicker;
-                if (picPicker == 1) {
-                    g.drawImage(killSplotch, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
-                } else if (picPicker == 2) {
-                    g.drawImage(killSplotch2, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height,null);
-                } else if (picPicker == 3) {
-                    g.drawImage(killSplotch3, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height,null);
                 }
             }
-        }
+            for (int i = 0; i < enemies2.length; i++) {
+                if (enemies2[i].isAlive == true) {
+                    g.drawImage(enemies2[i].pic, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
+                } else if (enemies2[i].isAlive == false) {
+                    int picPicker = enemies2[i].picPicker;
+                    if (picPicker == 1) {
+                        g.drawImage(killSplotch, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
+                    } else if (picPicker == 2) {
+                        g.drawImage(killSplotch2, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
+                    } else if (picPicker == 3) {
+                        g.drawImage(killSplotch3, enemies2[i].xpos, enemies2[i].ypos, enemies2[i].width, enemies2[i].height, null);
+                    }
+                }
+                if (enemies3[i].isAlive == true) {
+                    g.drawImage(enemies3[i].pic, enemies3[i].xpos, enemies3[i].ypos, enemies3[i].width, enemies3[i].height, null);
+                } else if (enemies3[i].isAlive == false) {
+                    int picPicker = enemies3[i].picPicker;
+                    if (picPicker == 1) {
+                        g.drawImage(killSplotch, enemies3[i].xpos, enemies3[i].ypos, enemies3[i].width, enemies3[i].height, null);
+                    } else if (picPicker == 2) {
+                        g.drawImage(killSplotch2, enemies3[i].xpos, enemies3[i].ypos, enemies3[i].width, enemies3[i].height, null);
+                    } else if (picPicker == 3) {
+                        g.drawImage(killSplotch3, enemies3[i].xpos, enemies3[i].ypos, enemies3[i].width, enemies3[i].height, null);
+                    }
+                }
+            }
 //    }
 
-
+        }
         g.dispose();
         bufferStrategy.show();
     }
