@@ -58,7 +58,7 @@ public class Enemy1 {
             }
         }
         else{
-            xpos=xpos+dx;
+//            xpos=xpos+dx;
             if (xpos > 900 - width) {
                 xpos = 900-width;
             }

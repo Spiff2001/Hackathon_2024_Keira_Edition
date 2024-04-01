@@ -55,12 +55,6 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public int mousePressedX, mousePressedY;
     public int mouseReleasedX, mouseReleasedY;
 
-//    public int picPicker;
-
-    public boolean dragging = false;
-
-
-
 
     // Main method definition
     // This is the code that runs first and automatically
@@ -93,7 +87,6 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
         enemies1 = new Enemy1[10];
         for(int i = 0; i < enemies1.length; i++){
-//            int picPicker = Math.random()
             enemies1[i] = new Enemy1(i*80+20,100, enemy1IMG);
             System.out.println("enemy made");
         }
@@ -125,8 +118,6 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
             if(enemies1[i].hitbox.contains(mouseX,mouseY)){
                 if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies1[i].width*0.75) {
                     enemies1[i].isAlive=false;
-//                    picPicker = (int)(Math.random()*3)+1;
-//                    System.out.println(picPicker);
                 } else {
                     System.out.println("Attack too short");
                 }
