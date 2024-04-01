@@ -40,47 +40,32 @@ public class Enemy1 {
 
         }
 
-        public void live(boolean lives){
-            if(lives == false){
-                isAlive=false;
-//            hitCounter++;
-//            isAlive = true;
-                currentTime=System.currentTimeMillis();
-                respawnTime=Math.random()*5+3;
-                if(currentTime>respawnTime){
-                    isAlive=true;
-                }
-            }
 
-        }
 
-    public void move() {
+    public void move(boolean lives) {
 //        xpos = xpos - dx;
 //        ypos = ypos - dy;
 
-        if (xpos > 900 - width) {
-            xpos = 900-width;
+        if(lives == false){
+            isAlive=false;
+//            hitCounter++;
+//            isAlive = true;
+            currentTime=System.currentTimeMillis();
+            respawnTime=Math.random()*5+3;
+            if(currentTime>respawnTime){
+                isAlive=true;
+            }
         }
+        else{
+            xpos=xpos+dx;
+            if (xpos > 900 - width) {
+                xpos = 900-width;
+            }
 
-        if ( xpos < 0) {
-            xpos=0;
+            if ( xpos < 0) {
+                xpos=0;
+            }
         }
-
-        if (ypos < 675) { // jumping
-            dy = dy + 1;
-        }
-
-        if (ypos > 675) {
-            ypos = 600;
-        }
-
-        // if (ypos > 701 - height) {
-        //       dy = -dy;
-        //  }
-
-        //  if (ypos <=0) {
-        //     dy=-dy;
-        //   }
         hitbox = new Rectangle(xpos,ypos,width,height);
     }
 
