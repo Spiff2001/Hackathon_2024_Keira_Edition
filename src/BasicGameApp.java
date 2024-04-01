@@ -36,6 +36,8 @@ public class BasicGameApp implements Runnable,MouseListener,MouseMotionListener,
 
     public Enemy enemy1;
     public Enemy enemy2;
+    public int mouseX, mouseY;
+    public boolean dragging = false;
 
 
     // Main method definition
@@ -179,7 +181,19 @@ public class BasicGameApp implements Runnable,MouseListener,MouseMotionListener,
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        int x, y;
+        x = e.getX();
+        y = e.getY();
 
+        mouseX = x;
+        mouseY = y;
+        System.out.println("Mouse Clicked at " + x + ", " + y);
+
+        for (int i = 0; i < enemies.length; i++) {
+            if (enemies[i].hitbox.contains(x, y)) {
+
+            }
+        }
     }
 
     @Override
