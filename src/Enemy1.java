@@ -74,8 +74,6 @@ public class Enemy1 {
 
             }
 
-
-
         }
         hitbox = new Rectangle(xpos,ypos,width,height);
     }
