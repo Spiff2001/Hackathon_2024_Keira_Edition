@@ -9,6 +9,9 @@ public class Enemy {
     public int hitCounter = 0;
     public Rectangle hitbox;
     public boolean isAlive;
+    public double currentTime;
+    public double respawnTime;
+    public double elapsedTime;
 
     public Enemy(int pXpos, int pYpos) {
 
@@ -18,10 +21,21 @@ public class Enemy {
         width = 65;
         height = 65;
         hitbox = new Rectangle(xpos, ypos, width, height);
-        if(isAlive == false){
-            hitCounter++;
-            isAlive = true;
+
         }
+
+        public void live(boolean lives){
+            if(lives == false){
+                isAlive=false;
+//            hitCounter++;
+//            isAlive = true;
+                currentTime=System.currentTimeMillis();
+                respawnTime=Math.random()*5+3;
+                if(currentTime>respawnTime){
+                    isAlive=true;
+                }
+        }
+
 
     }
 
