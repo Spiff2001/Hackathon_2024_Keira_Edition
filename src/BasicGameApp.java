@@ -17,7 +17,7 @@ import java.awt.event.*;
 
 //*******************************************************************************
 
-public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotionListener,KeyListener {
+public class BasicGameApp implements Runnable,MouseListener,MouseMotionListener,KeyListener {
 
     //Variable Definition Section
     //Declare the variables used in the program
@@ -37,6 +37,7 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
     public Enemy enemy1;
     public Enemy enemy2;
 
+
     // Main method definition
     // This is the code that runs first and automatically
     public static void main(String[] args) {
@@ -48,6 +49,9 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
     // This section is the setup portion of the program
     // Initialize your variables and construct your program objects here.
     public BasicGameApp() { // BasicGameApp constructor
+
+        enemy1 = new Enemy(10000,10000);
+        enemy2 = new Enemy(10000,10000);
 
         setUpGraphics();
 
