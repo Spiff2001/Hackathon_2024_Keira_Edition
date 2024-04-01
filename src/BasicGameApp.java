@@ -148,24 +148,24 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
-        if(hitCounter<3) {
+        if(hitCounter<5) {
             g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
         }
-        if(3<hitCounter&&hitCounter<6){
+        if(5<=hitCounter&&hitCounter<10){
             g.drawImage(background2,0,0, WIDTH,HEIGHT, null);
         }
-        if(6<hitCounter&&hitCounter<9){
+        if(10<=hitCounter&&hitCounter<15){
             g.drawImage(background3,0,0, WIDTH,HEIGHT, null);
         }
-        if(12<hitCounter&&hitCounter<15){
+        if(15<=hitCounter&&hitCounter<20){
             g.drawImage(background4,0,0, WIDTH,HEIGHT, null);
         }
-        if(18<hitCounter&&hitCounter<21){
+        if(20<=hitCounter&&hitCounter<25){
             g.drawImage(background5,0,0, WIDTH,HEIGHT, null);
         }
-        if(21<hitCounter&&hitCounter<24){
+        if(25<=hitCounter&&hitCounter<30){
             g.drawImage(background6,0,0, WIDTH,HEIGHT, null);
-        }if(27<hitCounter&&hitCounter<30){
+        }if(30<=hitCounter&&hitCounter<35){
             g.drawImage(background7,0,0, WIDTH,HEIGHT, null);
         }
 
