@@ -27,7 +27,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     //Sets the width and height of the program window
     final int WIDTH = 900;
     final int HEIGHT = 675;
-
+    public int hitCounter =0;
     //Declare the variables needed for the graphics
     public JFrame frame;
     public Canvas canvas;
@@ -122,9 +122,11 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
     public void checkIntersections() {
         for (int i = 0; i < enemies1.length; i++) {
-            if(enemies1[i].hitbox.contains(mouseX,mouseY)){
+            if(enemies1[i].hitbox.contains(mouseX,mouseY)&&enemies1[i].isAlive==true){
                 if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies1[i].width*0.75) {
                     enemies1[i].isAlive=false;
+                    hitCounter++;
+                    System.out.println("blarp"+ hitCounter);
 //                    picPicker = (int)(Math.random()*3)+1;
 //                    System.out.println(picPicker);
                 } else {
