@@ -11,6 +11,7 @@ public class Enemy1 {
     public int hitCounter = 0;
     public Rectangle hitbox;
     public boolean isAlive;
+    public boolean draggedThrough;
 
     public double currentTime;
     public double respawnTime;
@@ -32,8 +33,8 @@ public class Enemy1 {
         isAlive = true;
         dx = (int)(Math.random()*10+1);
         dy = (int)(Math.random()*10+1);
-        width = 250;
-        height = 250;
+        width = 100;
+        height = 100;
         pic = picParameter;
         hitbox = new Rectangle(xpos, ypos, width, height);
 
@@ -54,36 +55,33 @@ public class Enemy1 {
         }
 
     public void move() {
-        if(right){
-            xpos = xpos +dx;
-            if(xpos>900-width){
-                xpos = 900-width;
-            }
+//        xpos = xpos - dx;
+//        ypos = ypos - dy;
+
+        if (xpos > 900 - width) {
+            xpos = 900-width;
         }
 
-        if(left){
-            xpos = xpos -dx;
-            if(xpos<0){
-                xpos = 0;
-            }
+        if ( xpos < 0) {
+            xpos=0;
         }
 
-        if(down){
-            ypos = ypos +dy;
-            if(ypos>675-height){
-                ypos = 675-height;
-            }
+        if (ypos < 675) { // jumping
+            dy = dy + 1;
         }
 
-        if(up){
-            ypos = ypos -dy;
-            if(ypos<0){
-                ypos = 0;
-            }
+        if (ypos > 675) {
+            ypos = 600;
         }
 
-        //always put this after you've done all the changing of the xpos and ypos values
-        hitbox = new Rectangle(xpos, ypos, width, height);
+        // if (ypos > 701 - height) {
+        //       dy = -dy;
+        //  }
+
+        //  if (ypos <=0) {
+        //     dy=-dy;
+        //   }
+        hitbox = new Rectangle(xpos,ypos,width,height);
     }
 
 }

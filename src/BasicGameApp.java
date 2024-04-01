@@ -126,8 +126,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
     public void checkIntersections() {
         for (int i = 0; i < enemies1.length; i++) {
-            if(enemies1[i].hitbox.contains(mousePressedX,mousePressedY)){
-                if (Math.sqrt((mousePressedX-mouseReleasedX)*(mousePressedX-mouseReleasedX)+(mousePressedY-mouseReleasedY)*(mousePressedY-mouseReleasedY)) >= enemies1[i].width*0.75) {
+            if(enemies1[i].hitbox.contains(mouseX,mouseY)){
+                if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies1[i].width*0.75) {
                     enemies1[i].isAlive=false;
                 } else {
                     System.out.println("Attack too short");
@@ -216,6 +216,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
     }
 
     @Override
@@ -263,8 +264,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
         mouseY = y;
         System.out.println("Mouse dragged at " + x + ", " + y);
 
-
         System.out.println("Mouse dragged at");
+        checkIntersections();
     }
 
     @Override
