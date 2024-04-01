@@ -27,7 +27,6 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     //Sets the width and height of the program window
     final int WIDTH = 900;
     final int HEIGHT = 675;
-    public int hitCounter = 0;
 
     //Declare the variables needed for the graphics
     public JFrame frame;
@@ -51,6 +50,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public BufferStrategy bufferStrategy;
 
     public Enemy1 enemies1[];
+
+    public int killCount = 0;
 
     public int mouseX, mouseY;
     public int mousePressedX, mousePressedY;
@@ -123,11 +124,12 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
     public void checkIntersections() {
         for (int i = 0; i < enemies1.length; i++) {
-            if(enemies1[i].hitbox.contains(mouseX,mouseY)&&enemies1[i].isAlive == true){
+            if(enemies1[i].hitbox.contains(mouseX,mouseY)){
                 if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies1[i].width*0.75) {
+                    if (enemies1[i].isAlive == true) {
+                        killCount++;
+                    }
                     enemies1[i].isAlive=false;
-                    hitCounter++;
-                    System.out.println("blarp"+ hitCounter);
                     enemies1[i].dx = 0;
                     enemies1[i].dy = 0;
                     enemies1[i].gravity = 0;
@@ -148,27 +150,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
-        if(hitCounter<5) {
-            g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
-        }
-        if(5<=hitCounter&&hitCounter<10){
-            g.drawImage(background2,0,0, WIDTH,HEIGHT, null);
-        }
-        if(10<=hitCounter&&hitCounter<15){
-            g.drawImage(background3,0,0, WIDTH,HEIGHT, null);
-        }
-        if(15<=hitCounter&&hitCounter<20){
-            g.drawImage(background4,0,0, WIDTH,HEIGHT, null);
-        }
-        if(20<=hitCounter&&hitCounter<25){
-            g.drawImage(background5,0,0, WIDTH,HEIGHT, null);
-        }
-        if(25<=hitCounter&&hitCounter<30){
-            g.drawImage(background6,0,0, WIDTH,HEIGHT, null);
-        }if(30<=hitCounter&&hitCounter<35){
-            g.drawImage(background7,0,0, WIDTH,HEIGHT, null);
-        }
-
+        g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+        g.drawString("Score " + killCount*100, 40, 40);
 
         //draw the images
         for (int i = 0; i < enemies1.length; i++) {
