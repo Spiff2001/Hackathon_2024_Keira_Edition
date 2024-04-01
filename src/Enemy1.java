@@ -12,19 +12,17 @@ public class Enemy1 {
     public Rectangle hitbox;
     public boolean isAlive;
     public boolean draggedThrough;
-    public int picPicker;
 
     public double currentTime;
     public double respawnTime;
     public double elapsedTime;
+    public int counter;
 
     public Image pic;
 
+    public int picPicker;
+    public int gravity;
 
-    public boolean right;
-    public boolean down;
-    public boolean left;
-    public boolean up;
 
 
     public Enemy1(int pXpos, int pYpos, Image picParameter) {
@@ -39,14 +37,17 @@ public class Enemy1 {
         pic = picParameter;
         hitbox = new Rectangle(xpos, ypos, width, height);
         picPicker = (int)(Math.random()*3)+1;
+        gravity=2;
+
         }
 
 
 
     public void move(boolean lives) {
+
 //        xpos = xpos - dx;
 //        ypos = ypos - dy;
-
+        counter+=1;
         if(lives == false){
             isAlive=false;
 //            hitCounter++;
@@ -58,14 +59,23 @@ public class Enemy1 {
             }
         }
         else{
-//            xpos=xpos+dx;
+            xpos=xpos+dx;
+            ypos=ypos-dy;
+
+            if((counter%20)==0){
+                dy=dy-gravity;
+            }
+
             if (xpos > 900 - width) {
                 xpos = 900-width;
             }
 
             if ( xpos < 0) {
-                xpos=0;
+
             }
+
+
+
         }
         hitbox = new Rectangle(xpos,ypos,width,height);
     }
