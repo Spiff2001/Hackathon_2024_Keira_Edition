@@ -137,7 +137,9 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     }
 
     public void moveThings() {
-        //call the move() code for each object
+        for (int i = 0; i < enemies1.length; i++) {
+            enemies1[i].move();
+        }
     }
 
     //Paints things on the screen using bufferStrategy
