@@ -31,6 +31,25 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public JFrame frame;
     public Canvas canvas;
     public JPanel panel;
+    public Image background;
+    public Image background2;
+    public Image background3;
+    public Image background4;
+    public Image background5;
+    public Image background6;
+    public Image background7;
+    public Image enemy1IMG;
+    public Image enemy2IMG;
+    public Image enemy3IMG;
+    public Image enemy4IMG;
+    public Image killSplotch;
+    public Image killSplotch2;
+
+
+
+
+
+
 
     public BufferStrategy bufferStrategy;
 
@@ -61,6 +80,20 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
 
         setUpGraphics();
+        background = Toolkit.getDefaultToolkit().getImage("background game");
+        background2 = Toolkit.getDefaultToolkit().getImage("background game2");
+        background3 = Toolkit.getDefaultToolkit().getImage("background game3");
+        background4 = Toolkit.getDefaultToolkit().getImage("background game4");
+        background5 = Toolkit.getDefaultToolkit().getImage("background game5");
+        background6 = Toolkit.getDefaultToolkit().getImage("background game6");
+        background7 = Toolkit.getDefaultToolkit().getImage("background game7");
+        enemy1IMG = Toolkit.getDefaultToolkit().getImage("enemies 1");
+        enemy2IMG = Toolkit.getDefaultToolkit().getImage("enemies 2");
+        enemy3IMG = Toolkit.getDefaultToolkit().getImage("background game");
+        enemy4IMG = Toolkit.getDefaultToolkit().getImage("background game");
+        killSplotch = Toolkit.getDefaultToolkit().getImage("background game");
+        killSplotch2 = Toolkit.getDefaultToolkit().getImage("background game");
+
 
         enemies = new Enemy[10];
         for(int i = 0; i < 10; i++){
@@ -108,6 +141,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
 
         //draw the images
+        g.drawImage(background, 0 ,0);
+        g.drawImage(background,0,0,null);
 
         g.dispose();
         bufferStrategy.show();
