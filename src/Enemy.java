@@ -1,3 +1,4 @@
+
 import java.awt.*;
 
 public class Enemy {
@@ -8,8 +9,6 @@ public class Enemy {
     public int hitCounter = 0;
     public Rectangle hitbox;
     public boolean isAlive;
-
-
 
     public Enemy(int pXpos, int pYpos) {
 
