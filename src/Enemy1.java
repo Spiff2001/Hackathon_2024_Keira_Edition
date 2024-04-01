@@ -12,6 +12,7 @@ public class Enemy1 {
     public Rectangle hitbox;
     public boolean isAlive;
     public boolean draggedThrough;
+    public int picPicker;
 
     public double currentTime;
     public double respawnTime;
@@ -33,11 +34,11 @@ public class Enemy1 {
         isAlive = true;
         dx = (int)(Math.random()*10+1);
         dy = (int)(Math.random()*10+1);
-        width = 210;
-        height = 210;
+        width = 100;
+        height = 100;
         pic = picParameter;
         hitbox = new Rectangle(xpos, ypos, width, height);
-
+        picPicker = (int)(Math.random()*3)+1;
         }
 
         public void live(boolean lives){

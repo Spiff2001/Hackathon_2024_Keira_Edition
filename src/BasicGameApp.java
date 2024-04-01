@@ -47,12 +47,6 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public Image killSplotch2;
     public Image killSplotch3;
 
-
-
-
-
-
-
     public BufferStrategy bufferStrategy;
 
     public Enemy1 enemies1[];
@@ -60,6 +54,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     public int mouseX, mouseY;
     public int mousePressedX, mousePressedY;
     public int mouseReleasedX, mouseReleasedY;
+
+//    public int picPicker;
 
     public boolean dragging = false;
 
@@ -97,8 +93,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
         enemies1 = new Enemy1[10];
         for(int i = 0; i < enemies1.length; i++){
-//            int picPicker = Math.random(*4)
-            enemies1[i] = new Enemy1(i*100+100,100, enemy1IMG);
+//            int picPicker = Math.random()
+            enemies1[i] = new Enemy1(i*80+20,100, enemy1IMG);
             System.out.println("enemy made");
         }
 
@@ -129,6 +125,8 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
             if(enemies1[i].hitbox.contains(mouseX,mouseY)){
                 if (Math.sqrt((mousePressedX-mouseX)*(mousePressedX-mouseX)+(mousePressedY-mouseY)*(mousePressedY-mouseY)) >= enemies1[i].width*0.75) {
                     enemies1[i].isAlive=false;
+//                    picPicker = (int)(Math.random()*3)+1;
+//                    System.out.println(picPicker);
                 } else {
                     System.out.println("Attack too short");
                 }
@@ -146,14 +144,24 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
-        g.drawImage(background,0,0, WIDTH ,HEIGHT,null);
+        g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
 
         //draw the images
-        for (int i=0; i<enemies1.length; i++) {
+        for (int i = 0; i < enemies1.length; i++) {
             if (enemies1[i].isAlive == true) {
-                g.drawImage(enemies1[i].pic, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height,null);
+                g.drawImage(enemies1[i].pic, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height, null);
+            } else if (enemies1[i].isAlive == false){
+                int picPicker = enemies1[i].picPicker;
+                    if (picPicker == 1) {
+                        g.drawImage(killSplotch, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height, null);
+                    } else if (picPicker == 2) {
+                        g.drawImage(killSplotch2, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height,null);
+                    } else if (picPicker == 3) {
+                        g.drawImage(killSplotch3, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height,null);
+                    }
             }
         }
+//    }
 
 
         g.dispose();
