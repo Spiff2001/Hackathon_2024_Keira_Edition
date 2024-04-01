@@ -34,8 +34,8 @@ public class Enemy1 {
         isAlive = true;
         dx = (int)(Math.random()*10+1);
         dy = (int)(Math.random()*10+1);
-        width = 100;
-        height = 100;
+        width = 210;
+        height = 210;
         pic = picParameter;
         hitbox = new Rectangle(xpos, ypos, width, height);
         picPicker = (int)(Math.random()*3)+1;
