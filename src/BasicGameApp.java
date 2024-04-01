@@ -152,19 +152,7 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x, y;
-        x = e.getX();
-        y = e.getY();
 
-        mouseX = x;
-        mouseY = y;
-        System.out.println();
-        System.out.println("Mouse Clicked at " + x + ", " + y);
-
-        for (int i = 0; i < enemies.length; i++) {
-            if (enemies[i].hitbox.contains(x, y)) {
-            }
-        }
     }
 
     @Override
@@ -174,6 +162,7 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
     }
 
     @Override
@@ -188,6 +177,19 @@ public class BasicGameApp implements Runnable, Runnable,MouseListener,MouseMotio
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        int x, y;
+        x = e.getX();
+        y = e.getY();
+
+        mouseX = x;
+        mouseY = y;
+        System.out.println("Mouse Clicked at " + x + ", " + y);
+
+        for (int i = 0; i < enemies.length; i++) {
+            if (enemies[i].hitbox.contains(x, y)) {
+
+            }
+        }
     }
 
     @Override
