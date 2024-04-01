@@ -38,7 +38,7 @@ public class Enemy1 {
         pic = picParameter;
         hitbox = new Rectangle(xpos, ypos, width, height);
         picPicker = (int)(Math.random()*3)+1;
-        gravity=1;
+        gravity=2;
 
         }
 
@@ -69,10 +69,10 @@ public class Enemy1 {
 
             if(ypos>675&isAlive==true){
                 ypos=675;
-                dy = (int)(Math.random()*8+2);;
+                dy = (int)(Math.random()*8+4);;
             }
             if((xpos>1000 || xpos<0)&isAlive==true){
-                xpos=450;
+                xpos=(int)(Math.random()*900);
                 dx = (int)(Math.random()*10-5);
 
             }
