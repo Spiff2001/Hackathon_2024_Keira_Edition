@@ -13,10 +13,11 @@ import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.event.*;
 
 //*******************************************************************************
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, MouseListener, MouseMotionListener, KeyListener {
 
     //Variable Definition Section
     //Declare the variables used in the program
@@ -33,6 +34,19 @@ public class BasicGameApp implements Runnable {
 
     public BufferStrategy bufferStrategy;
 
+    public Enemy enemy1;
+    public Enemy enemy2;
+    public Enemy enemies[];
+
+    public int mouseX, mouseY;
+    public int mousePressedX, mousePressedY;
+    public int mouseReleasedX, mouseReleasedY;
+
+    public boolean dragging = false;
+
+
+
+
     // Main method definition
     // This is the code that runs first and automatically
     public static void main(String[] args) {
@@ -45,7 +59,13 @@ public class BasicGameApp implements Runnable {
     // Initialize your variables and construct your program objects here.
     public BasicGameApp() { // BasicGameApp constructor
 
+
         setUpGraphics();
+
+        enemies = new Enemy[10];
+        for(int i = 0; i < 10; i++){
+//            enemies[i] = new Enemy (i*100+100,400, enemyPic);
+        }
 
         //variable and objects
         //create (construct) the objects needed for the game
@@ -69,6 +89,14 @@ public class BasicGameApp implements Runnable {
         }
     }
 
+    public void checkIntersections() {
+        for (int i = 0; i < enemies.length; i++) {
+            if(enemies[i].hitBox.contains(mousePressedX,mousePressedY) && Math.sqrt((mousePressedX-mouseReleasedX)*(mousePressedX-mouseReleasedX)+(mousePressedY-mouseReleasedY)*(mousePressedY-mouseReleasedY)) >= enemies[i].width*0.75){
+                enemies[i].isAlive=false;
+            }
+        }
+    }
+
     public void moveThings() {
         //call the move() code for each object
     }
@@ -77,6 +105,7 @@ public class BasicGameApp implements Runnable {
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
+
 
         //draw the images
 
@@ -105,6 +134,8 @@ public class BasicGameApp implements Runnable {
         canvas = new Canvas();
         canvas.setBounds(0, 0, WIDTH, HEIGHT);
         canvas.setIgnoreRepaint(true);
+        canvas.addMouseListener(this);
+        canvas.addMouseMotionListener(this);
 
         panel.add(canvas);  // adds the canvas to the panel.
 
@@ -119,6 +150,79 @@ public class BasicGameApp implements Runnable {
         bufferStrategy = canvas.getBufferStrategy();
         canvas.requestFocus();
         System.out.println("DONE graphic setup");
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int x, y;
+        x = e.getX();
+        y = e.getY();
+
+        mousePressedX = x;
+        mousePressedY = y;
+
+        System.out.println("mouse clicked");
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        int x, y;
+        x = e.getX();
+        y = e.getY();
+
+        mouseReleasedX = x;
+        mouseReleasedY = y;
+
+        System.out.println("mouse released");
+        checkIntersections();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        int x, y;
+        x = e.getX();
+        y = e.getY();
+
+        mouseX = x;
+        mouseY = y;
+        System.out.println("Mouse dragged at " + x + ", " + y);
+
+
+        System.out.println("Mouse dragged at");
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 
 }
