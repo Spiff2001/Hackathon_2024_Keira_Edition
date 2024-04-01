@@ -55,9 +55,7 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
 
     public BufferStrategy bufferStrategy;
 
-    public Enemy enemy1;
-    public Enemy enemy2;
-    public Enemy enemies[];
+    public Enemy1 enemies1[];
 
     public int mouseX, mouseY;
     public int mousePressedX, mousePressedY;
@@ -97,11 +95,11 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
         killSplotch2 = Toolkit.getDefaultToolkit().getImage("splatter 2.png");
         killSplotch3 = Toolkit.getDefaultToolkit().getImage("splatter 3.png");
 
-
-
-        enemies = new Enemy[10];
-        for(int i = 0; i < 10; i++){
-//            enemies[i] = new Enemy (i*100+100,400, enemyPic);
+        enemies1 = new Enemy1[10];
+        for(int i = 0; i < enemies1.length; i++){
+//            int picPicker = Math.random(*4)
+            enemies1[i] = new Enemy1(i*100+100,100, enemy1IMG);
+            System.out.println("enemy made");
         }
 
         //variable and objects
@@ -127,10 +125,10 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     }
 
     public void checkIntersections() {
-        for (int i = 0; i < enemies.length; i++) {
-            if(enemies[i].hitbox.contains(mousePressedX,mousePressedY)){
-                if (Math.sqrt((mousePressedX-mouseReleasedX)*(mousePressedX-mouseReleasedX)+(mousePressedY-mouseReleasedY)*(mousePressedY-mouseReleasedY)) >= enemies[i].width*0.75) {
-                    enemies[i].isAlive=false;
+        for (int i = 0; i < enemies1.length; i++) {
+            if(enemies1[i].hitbox.contains(mousePressedX,mousePressedY)){
+                if (Math.sqrt((mousePressedX-mouseReleasedX)*(mousePressedX-mouseReleasedX)+(mousePressedY-mouseReleasedY)*(mousePressedY-mouseReleasedY)) >= enemies1[i].width*0.75) {
+                    enemies1[i].isAlive=false;
                 } else {
                     System.out.println("Attack too short");
                 }
@@ -145,11 +143,15 @@ public class BasicGameApp implements Runnable, MouseListener, MouseMotionListene
     //Paints things on the screen using bufferStrategy
     private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-        g.drawImage(background,0,0, WIDTH ,HEIGHT,null);
         g.clearRect(0, 0, WIDTH, HEIGHT);
+        g.drawImage(background,0,0, WIDTH ,HEIGHT,null);
 
         //draw the images
-        g.drawImage(background,0,0, WIDTH ,HEIGHT,null);
+        for (int i=0; i<enemies1.length; i++) {
+            if (enemies1[i].isAlive == true) {
+                g.drawImage(enemies1[i].pic, enemies1[i].xpos, enemies1[i].ypos, enemies1[i].width, enemies1[i].height,null);
+            }
+        }
 
 
         g.dispose();
