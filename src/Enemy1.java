@@ -39,7 +39,7 @@ public class Enemy1 {
         picPicker = (int)(Math.random()*3)+1;
         gravity=2;
 
-        }
+    }
 
 
 
