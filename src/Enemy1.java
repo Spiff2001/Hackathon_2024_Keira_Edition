@@ -8,7 +8,7 @@ public class Enemy1 {
     public int dy;
     public int width;
     public int height;
-//    public int hitCounter = 0;
+    public int hitCounter = 0;
     public Rectangle hitbox;
     public boolean isAlive;
     public boolean draggedThrough;
@@ -22,6 +22,7 @@ public class Enemy1 {
 
     public int picPicker;
     public int gravity;
+    public int lifeCounter;
 
 
 
@@ -30,58 +31,53 @@ public class Enemy1 {
         xpos = pXpos;
         ypos = pYpos;
         isAlive = true;
-        dx = (int)(Math.random()*10+1);
-        dy = (int)(Math.random()*10+1);
+        dy = (int)(Math.random()*8+2);
+        dx = (int)(Math.random()*10-5);
         width = 210;
         height = 210;
         pic = picParameter;
         hitbox = new Rectangle(xpos, ypos, width, height);
         picPicker = (int)(Math.random()*3)+1;
-        gravity=2;
+        gravity=1;
 
         }
-        public void gravityMove(int a){
-        int startingV = a;
-        int counter = 0;
-        counter++;
-        dy =  startingV-(counter*(-5));
-        }
 
 
 
-    public void move(boolean lives) {
+    public void move() {
 
-        xpos = xpos - dx;
-//        ypos = ypos + dy;
-//        ypos = gravityMove(10);
+//        xpos = xpos - dx;
+//        ypos = ypos - dy;
         counter+=1;
-        if(lives == false){
-            isAlive=false;
-//            hitCounter++;
-//            System.out.println(hitCounter);
-//            System.out.println("hitcounter"+ hitCounter);
-//            isAlive = true;
-            currentTime=System.currentTimeMillis();
-            respawnTime=Math.random()*5+3;
-            if(currentTime>respawnTime){
+        if(!isAlive){
+            dy=0;
+            lifeCounter+=1;
+            if(lifeCounter%300==0){
                 isAlive=true;
+                xpos=(int)(Math.random()*900);
+                ypos=900;
+                dx = (int)(Math.random()*10-5);
+                dy = (int)(Math.random()*8+2);
             }
         }
         else{
             xpos=xpos+dx;
             ypos=ypos-dy;
-
-            if((counter%20)==0){
+            if((counter%10)==0){
                 dy=dy-gravity;
             }
 
-            if (xpos > 900 - width) {
-                xpos = 900-width;
+            if(ypos>675&isAlive==true){
+                ypos=675;
+                dy = (int)(Math.random()*8+2);;
+            }
+            if((xpos>1000 || xpos<0)&isAlive==true){
+                xpos=450;
+                dx = (int)(Math.random()*10-5);
+
             }
 
-            if ( xpos < 0) {
 
-            }
 
         }
         hitbox = new Rectangle(xpos,ypos,width,height);
