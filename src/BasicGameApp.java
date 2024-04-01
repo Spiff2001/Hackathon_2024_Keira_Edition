@@ -13,11 +13,10 @@ import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.event.*;
 
 //*******************************************************************************
 
-public class BasicGameApp implements Runnable,MouseListener,MouseMotionListener,KeyListener{
+public class BasicGameApp implements Runnable {
 
     //Variable Definition Section
     //Declare the variables used in the program
@@ -122,53 +121,4 @@ public class BasicGameApp implements Runnable,MouseListener,MouseMotionListener,
         System.out.println("DONE graphic setup");
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 }
